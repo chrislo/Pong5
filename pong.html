@@ -9,16 +9,16 @@ var canvas = document.getElementById('game');
 var board = canvas.getContext('2d');
 
 var paddle = (function() {
-  var currentPosition = 150;
+  var currentPosition = 120;
   var paddleHeight = 50;
   return {
     moveUp: function() {
-      if ( (currentPosition - 20) > 0 ) { 
+      if ( currentPosition - 20 >= 0 ) { 
         currentPosition = currentPosition - 20;
       }
     },
     moveDown: function() {
-      if ( (currentPosition + 20) < canvas.height ) { 
+      if ( (currentPosition + paddleHeight + 20) <= canvas.height ) { 
         currentPosition = currentPosition + 20;
       }
     },
