@@ -35,24 +35,18 @@ var ball = (function() {
   var currentdY = 5;
 
   function checkCollision() {
-    if (currentX < 0) { 
-      currentdX = -currentdX; 
-      currentdY = +currentdY; 
-    }
-    else if (currentX > canvas.width) { 
-      currentdX = -currentdX; 
-      currentdY = +currentdY; 
-    }
-    else if (currentY < 0) { 
-      currentdX = +currentdX; 
-      currentdY = -currentdY; 
-    }
-    else if (currentY > canvas.height) { 
-      currentdX = +currentdX; 
-      currentdY = -currentdY; 
-    }
+    checkWallCollision();
   }                                    
-
+  function checkWallCollision() {
+    if (currentX < 0 || currentX > canvas.width) { 
+      currentdX = -currentdX; 
+      currentdY = +currentdY; 
+    }
+    else if (currentY < 0 || currentY > canvas.height) { 
+      currentdX = +currentdX; 
+      currentdY = -currentdY; 
+    }
+  }
   function calculateNewPosition() {
     currentX = currentX + currentdX;
     currentY = currentY + currentdY;
@@ -69,7 +63,7 @@ var ball = (function() {
 })();
 
 function init() {
-  setInterval(tick, 100);
+  setInterval(tick, 40);
   document.onkeydown = processKeyEvent; 
 }
 
