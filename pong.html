@@ -31,13 +31,37 @@ var paddle = (function() {
 var ball = (function() {
   var currentX = 200;
   var currentY = 150;                                    
-  var currentdX = -5; 
-  var currentdY = -0;
+  var currentdX = 5; 
+  var currentdY = 5;
+
+  function checkCollision() {
+    if (currentX < 0) { 
+      currentdX = -currentdX; 
+      currentdY = +currentdY; 
+    }
+    else if (currentX > canvas.width) { 
+      currentdX = -currentdX; 
+      currentdY = +currentdY; 
+    }
+    else if (currentY < 0) { 
+      currentdX = +currentdX; 
+      currentdY = -currentdY; 
+    }
+    else if (currentY > canvas.height) { 
+      currentdX = +currentdX; 
+      currentdY = -currentdY; 
+    }
+  }                                    
+
+  function calculateNewPosition() {
+    currentX = currentX + currentdX;
+    currentY = currentY + currentdY;
+  }
 
   return {
     move: function() {
-      currentX = currentX + currentdX;
-      currentY = currentY + currentdY;
+      checkCollision();                                    
+      calculateNewPosition();
       board.fillRect(currentX, currentY, 5, 5);
     },
   }
